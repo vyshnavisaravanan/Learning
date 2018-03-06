@@ -8,8 +8,9 @@ import org.junit.runner.RunWith;
 @RunWith(Cucumber.class)
 @CucumberOptions(
         features = ".",
-        tags = "@argos",
-        plugin ="json:target/cucumber.json"
+        tags = "@next",
+        plugin = {"pretty","html:target/cucumber-html-report","json:target/cucumber.json"}
         )
+
 public class CukesTestRun {
 }

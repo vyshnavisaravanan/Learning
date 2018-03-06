@@ -21,7 +21,8 @@ public class DriverHelper {
         PageFactory.initElements(driver, this);
     }
 
-    private String browserToExecute = "chrome";
+//    private String browserToExecute = "chrome";
+    String browserToExecute = System.getProperty("browser");
 
     public void closeBrowser()
     {

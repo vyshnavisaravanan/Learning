@@ -20,6 +20,7 @@ public class ProductDescriptionPage extends DriverHelper {
 
     List<String> productListfromProdDesc = new ArrayList<>();
 
+
     public void clickaddToCartButton()
     {
         addToCartButton.click();

@@ -7,10 +7,11 @@ import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.junit.Cucumber;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 
 
-
-public class Hooks {
+public class Hooks extends DriverHelper {
     Scenario scenario;
 
     private DriverHelper driverHelpers = new DriverHelper();
@@ -36,13 +37,25 @@ public class Hooks {
         driverHelpers.applyImpWaits();
         driverHelpers.applyActions();
     }
+    @Before("@next")
+    public void setUpnext() {
+        System.out.println("Im in hooks nop");
+        driverHelpers.openBrowser();
+        driverHelpers.maximiseBrowser();
+        driverHelpers.navigateTo("http://www.next.co.uk/");
+        driverHelpers.applyImpWaits();
+        driverHelpers.applyActions();
+    }
 
     @After
     public void tearDown(Scenario scenario) {
         this.scenario=scenario;
+        scenario.write("Test Execution finish");
         if(scenario.isFailed()){
             screenshot.takeScreenSHOT();
             fulllenscrshot.takeFullScreenshot();
+            scenario.embed(((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES),"image/png");
+//            scenario.embed(((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES), "image/png");
         }
 
         driverHelpers.closeBrowser();
